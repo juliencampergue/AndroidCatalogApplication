@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.eugrepmac.catalog.R
 
 /**
  * Describes all the catalog items accessible from the catalog list, along with all necessary
@@ -31,17 +32,20 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 sealed class AccessibleCatalogItems(
     val route: String,
     @StringRes val titleId: Int,
-    @DrawableRes val iconId: Int,
-    @DrawableRes val selectedIconId: Int,
+    @DrawableRes val iconId: Int? = null,
+    @DrawableRes val selectedIconId: Int? = null,
 ) {
-    // For the moment it is empty, but any item added will appear in here.
+    object COMPASS: AccessibleCatalogItems(
+        COMPASS_ROUTE,
+        R.string.compass_route_label,
+    )
 }
 
 /**
  * The list of screens that must be accessible from the catalog list.
  */
-val catalogListAccessibleScreens = emptyList<AccessibleCatalogItems> (
-    // For the moment it is empty, but any item added will be added in here as well.
+val catalogListAccessibleScreens = listOf(
+    AccessibleCatalogItems.COMPASS,
 )
 
 /**

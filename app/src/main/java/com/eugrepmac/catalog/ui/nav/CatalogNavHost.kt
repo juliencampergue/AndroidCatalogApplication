@@ -30,5 +30,6 @@ fun CatalogNavHost(
             navigationController = navController,
             isExpandedScreen=isExpandedScreen,
         )
+        compass()
     }
 }
