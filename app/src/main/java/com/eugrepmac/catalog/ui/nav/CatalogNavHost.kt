@@ -27,6 +27,7 @@ fun CatalogNavHost(
         modifier = modifier
     ) {
         root(
+            navigationController = navController,
             isExpandedScreen=isExpandedScreen,
         )
     }
