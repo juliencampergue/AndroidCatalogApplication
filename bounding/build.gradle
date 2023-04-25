@@ -1,23 +1,18 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.eugrepmac.catalog'
+    namespace 'com.eugrepmac.catalog.bounding'
     compileSdk compile_sdk_version
 
     defaultConfig {
-        applicationId "com.eugrepmac.catalog"
         minSdk min_sdk_version
         targetSdk target_sdk_version
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -33,30 +28,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
-    }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
 }
 
 dependencies {
     implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle)
-    implementation(libs.compose.activity)
-    implementation(libs.bundles.composeUi)
-    implementation(libs.bundles.navigation)
-
-    debugImplementation(libs.bundles.composeUiDebug)
 
     testImplementation(testLibs.junit)
 
     androidTestImplementation(androidTestLibs.bundles.androidTestBase)
-    androidTestImplementation(androidTestLibs.compose.ui)
 }
