@@ -12,5 +12,56 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Catalog"
 include ':app'
+
+def compose_version = '1.1.1'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            // Common versions
+            version('compose', compose_version)
+
+            // Base
+            library('androidx-core', 'androidx.core:core-ktx:1.7.0')
+            library('androidx-lifecycle', 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1')
+
+            // Compose Activity
+            library('compose-activity', 'androidx.activity:activity-compose:1.3.1')
+
+            // Compose UI
+            library('compose-ui', 'androidx.compose.ui', 'ui').versionRef('compose')
+            library('compose-preview', 'androidx.compose.ui', 'ui-tooling-preview').versionRef('compose')
+            library('compose-material3', 'androidx.compose.material3:material3:1.0.0-alpha02')
+            library('compose-material3-windowSizeClass', "androidx.compose.material3:material3-window-size-class:1.0.1") // -- Added to use WindowSize classes to know if screen is compact/extended/etc...
+            bundle('composeUi', ['compose-ui', 'compose-preview', 'compose-material3', 'compose-material3-windowSizeClass'])
+
+            library('compose-ui-tooling', 'androidx.compose.ui', 'ui-tooling').versionRef('compose')
+            library('compose-ui-test-manifest', 'androidx.compose.ui', 'ui-test-manifest').versionRef('compose')
+            bundle('composeUiDebug', ['compose-ui-tooling', 'compose-ui-test-manifest'])
+
+            //Navigation
+            library('navigation-runtime', 'androidx.navigation:navigation-runtime-ktx:2.5.3')
+            library('navigation-compose', "androidx.navigation:navigation-compose:2.5.3") // -- Jetpack Compose Integration into Navigation
+            bundle('navigation', ['navigation-runtime', 'navigation-compose'])
+        }
+
+        testLibs {
+            library('junit', 'junit:junit:4.13.2')
+        }
+
+        androidTestLibs {
+            // Common versions
+            version('compose', compose_version)
+
+            // Android test Base
+            library('androidx-junit', 'androidx.test.ext:junit:1.1.5')
+            library('androidx-espresso', 'androidx.test.espresso:espresso-core:3.5.1')
+            bundle('androidTestBase', ['androidx-junit', 'androidx-espresso'])
+
+            library('compose-ui', 'androidx.compose.ui', 'ui-test-junit4').versionRef('compose')
+        }
+    }
+}
